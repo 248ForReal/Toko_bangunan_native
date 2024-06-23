@@ -51,6 +51,8 @@ $pages = array(
   'daftar-barang' => array(
     'default' => 'pages/daftar-barang/daftar-barang.php',
     'add' => 'pages/daftar-barang/add.php',
+    'edit' => 'pages/daftar-barang/edit.php',
+    'delete' => 'pages/daftar-barang/delete.php'
   ),
   'laporan-barang-masuk' => array(
     'default' => 'pages/laporan/barang-masuk/barang-masuk.php'

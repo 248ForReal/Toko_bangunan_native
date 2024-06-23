@@ -1,11 +1,16 @@
 <?php 
 
-function selectData($table, $columns = "*", $condition = "", $orderBy = "", $limit = "")
+function selectData($table, $columns = "*", $join = "", $condition = "", $orderBy = "", $limit = "")
 {
     global $conn_online;
     
     // Bangun query SELECT
     $query = "SELECT $columns FROM $table";
+
+    // Tambahkan JOIN jika ada
+    if (!empty($join)) {
+        $query .= " " . $join;
+    }
 
     // Tambahkan kondisi jika ada
     if (!empty($condition)) {
