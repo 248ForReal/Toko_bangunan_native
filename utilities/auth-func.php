@@ -54,7 +54,7 @@ function login($username, $password) {
 function logout() {
     session_unset();
     session_destroy();
-    header("Location: ../");
+    echo "<script>alert('log out berhasil!');document.location.href='../';</script>";
     exit();  
 }
 ?>
