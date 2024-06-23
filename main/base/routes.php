@@ -41,15 +41,23 @@ $pages = array(
   'dashboard' => 'pages/dashboard/dashboard.php',
   'kasir' => array(
     'default' => 'pages/kasir/kasir.php',
-    'add' => 'pages/periode/add-periode.php',
-    'edit' => 'pages/periode/edit-periode.php',
-    'delete' => ''
   ),
   'barang-masuk' => array(
     'default' => 'pages/barang-masuk/barang-masuk.php',
   ),
   'daftar-barang' => array(
-    'default' => 'pages/daftar-barang/daftar-barang.php'
+    'default' => 'pages/daftar-barang/daftar-barang.php',
+    'add' => 'pages/daftar-barang/add.php',
+    'edit' => 'pages/daftar-barang/edit.php',
+    'barcode' => 'pages/daftar-barang/barcode.php',
+    'delete' => 'pages/daftar-barang/delete.php'
+  ),
+  'kategori' => array(
+    'default' => 'pages/kategori/daftar-kategori.php',
+    'add' => 'pages/kategori/add.php',
+    'edit' => 'pages/kategori/edit.php',
+    'barcode' => 'pages/kategori/barcode.php',
+    'delete' => 'pages/kategori/delete.php'
   ),
   'laporan-barang-masuk' => array(
     'default' => 'pages/laporan/barang-masuk/barang-masuk.php'
