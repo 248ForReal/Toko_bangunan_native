@@ -2,6 +2,14 @@
 <?php require "./base/routes.php" ?>
 <?php require "../utilities/query-func.php" ?>
 <?php require "../utilities/to-percent.php" ?>
+<?php require "../utilities/auth-func.php" ?>
+
+<?php 
+if (!isset($_SESSION['username'])) {
+    header("Location: ../");
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">

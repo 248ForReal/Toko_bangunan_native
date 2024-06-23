@@ -23,7 +23,5 @@ if ($conn_online->connect_errno) {
     die("Koneksi ke database online gagal: " . $conn_online->connect_errno);
 }
 
-// Jika kedua koneksi berhasil
-echo "Koneksi ke kedua database berhasil";
 
 ?>

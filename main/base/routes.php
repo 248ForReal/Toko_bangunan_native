@@ -33,11 +33,6 @@ $routes = array(
     'url' => '?page=laporan-barang-keluar',
     'icon' => '<i class=\'text-[1.25rem] text-white bx bxs-file-export\'></i>',
     'label' => 'Laporan Barang Keluar'
-  ),
-  array(
-    'url' => 'logout.php',
-    'icon' => '<i class=\'text-[1.25rem] text-white bx bxs-log-out\'></i>',
-    'label' => 'Logout'
   )
 
 );

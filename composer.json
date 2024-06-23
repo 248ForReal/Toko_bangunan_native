@@ -1,0 +1,21 @@
+{
+    "name": "fluxcup/toko_bangunan_native",
+    "autoload": {
+        "psr-4": {
+            "Fluxcup\\TokoBangunanNative\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "picqer/php-barcode-generator": "^2.4"
+    },
+    "authors": [
+        {
+            "name": "248ForReal",
+            "email": "masrauf123@gmail.com"
+        }
+    ]
+}

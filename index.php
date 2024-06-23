@@ -1,6 +1,19 @@
+<?php 
+require "./db/config.php";
+require "./utilities/auth-func.php";
+
+if (isset($_SESSION['username'])) {
+    header("Location: main/");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    login($_POST['username'], $_POST['password']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +21,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./assets/css/index.css">
 </head>
-
 <body>
   <div class="grid place-items-center min-h-screen bg-[#d7d6e1]">
     <div class="flex flex-col gap-5 p-4">
@@ -21,11 +33,11 @@
         <form method="post" action="" class="space-y-12">
           <div class="space-y-4">
             <div>
-              <label htmlFor="username" class="block mb-2 text-xs md::text-sm lg:text-sm">Nama Pengguna</label>
+              <label for="username" class="block mb-2 text-xs md::text-sm lg:text-sm">Nama Pengguna</label>
               <input type="text" name="username" id="username" placeholder="Nama Pengguna" class="text-sm w-full px-3 py-2 border rounded-md" />
             </div>
             <div>
-              <label htmlFor="password" class="text-xs md::text-sm lg:text-sm">Kata Sandi</label>
+              <label for="password" class="text-xs md::text-sm lg:text-sm">Kata Sandi</label>
               <input type="password" name="password" id="password" placeholder="*****" class="text-sm w-full px-3 py-2 border rounded-md" />
             </div>
           </div>
@@ -37,7 +49,5 @@
         </form>
       </div>
     </div>
-
 </body>
-
 </html>
