@@ -1,11 +1,16 @@
 <?php 
 
-function selectData($table, $columns = "*", $condition = "", $orderBy = "", $limit = "")
+function selectData($table, $columns = "*", $join = "", $condition = "", $orderBy = "", $limit = "")
 {
     global $conn_online;
     
     // Bangun query SELECT
     $query = "SELECT $columns FROM $table";
+
+    // Tambahkan JOIN jika ada
+    if (!empty($join)) {
+        $query .= " " . $join;
+    }
 
     // Tambahkan kondisi jika ada
     if (!empty($condition)) {
@@ -40,6 +45,102 @@ function selectData($table, $columns = "*", $condition = "", $orderBy = "", $lim
 
     // Kembalikan hasil query
     return $data;
+}
+
+// INSERT DATA
+function insertData($table, $data)
+{
+    global $conn_online;
+
+    // Escape nama tabel
+    $table = mysqli_real_escape_string($conn_online, $table);
+
+    // Escape data
+    $escapedData = array();
+    foreach ($data as $column => $value) {
+        $escapedColumn = mysqli_real_escape_string($conn_online, $column);
+        $escapedValue = mysqli_real_escape_string($conn_online, $value);
+        $escapedData[$escapedColumn] = $escapedValue;
+    }
+
+    // Bangun query INSERT
+    $columns = implode(", ", array_keys($escapedData));
+    $values = "'" . implode("', '", array_values($escapedData)) . "'";
+    $query = "INSERT INTO $table ($columns) VALUES ($values)";
+
+    // Persiapan statement
+    $statement = mysqli_prepare($conn_online, $query);
+
+    // Eksekusi statement
+    mysqli_stmt_execute($statement);
+
+    // Periksa kesalahan eksekusi statement
+    if (mysqli_stmt_errno($statement)) {
+        die("Error: " . mysqli_stmt_error($statement));
+    }
+
+    // Tutup statement
+    mysqli_stmt_close($statement);
+
+}
+
+function updateData($table, $data, $condition)
+{
+    global $conn_online;
+
+    // Escape nama tabel
+    $table = mysqli_real_escape_string($conn_online, $table);
+
+    // Escape data
+    $escapedData = array();
+    foreach ($data as $column => $value) {
+        $escapedColumn = mysqli_real_escape_string($conn_online, $column);
+        $escapedValue = mysqli_real_escape_string($conn_online, $value);
+        $escapedData[] = "$escapedColumn = '$escapedValue'";
+    }
+
+    // Bangun query UPDATE
+    $setClause = implode(", ", $escapedData);
+    $query = "UPDATE $table SET $setClause WHERE $condition";
+
+    // Persiapan statement
+    $statement = mysqli_prepare($conn_online, $query);
+
+    // Eksekusi statement
+    mysqli_stmt_execute($statement);
+
+    // Periksa kesalahan eksekusi statement
+    if (mysqli_stmt_errno($statement)) {
+        die("Error: " . mysqli_stmt_error($statement));
+    }
+
+    // Tutup statement
+    mysqli_stmt_close($statement);
+}
+
+function deleteData($table, $condition)
+{
+    global $conn_online;
+
+    // Escape nama tabel
+    $table = mysqli_real_escape_string($conn_online, $table);
+
+    // Bangun query DELETE
+    $query = "DELETE FROM $table WHERE $condition";
+
+    // Persiapan statement
+    $statement = mysqli_prepare($conn_online, $query);
+
+    // Eksekusi statement
+    mysqli_stmt_execute($statement);
+
+    // Periksa kesalahan eksekusi statement
+    if (mysqli_stmt_errno($statement)) {
+        die("Error: " . mysqli_stmt_error($statement));
+    }
+
+    // Tutup statement
+    mysqli_stmt_close($statement);
 }
 
 ?>

@@ -41,15 +41,15 @@ $pages = array(
   'dashboard' => 'pages/dashboard/dashboard.php',
   'kasir' => array(
     'default' => 'pages/kasir/kasir.php',
-    'add' => 'pages/periode/add-periode.php',
-    'edit' => 'pages/periode/edit-periode.php',
-    'delete' => ''
   ),
   'barang-masuk' => array(
     'default' => 'pages/barang-masuk/barang-masuk.php',
   ),
   'daftar-barang' => array(
-    'default' => 'pages/daftar-barang/daftar-barang.php'
+    'default' => 'pages/daftar-barang/daftar-barang.php',
+    'add' => 'pages/daftar-barang/add.php',
+    'edit' => 'pages/daftar-barang/edit.php',
+    'delete' => 'pages/daftar-barang/delete.php'
   ),
   'laporan-barang-masuk' => array(
     'default' => 'pages/laporan/barang-masuk/barang-masuk.php'
