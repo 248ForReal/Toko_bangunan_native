@@ -19,17 +19,14 @@
             </span>
           </a>
         </li>        
-      <?php } ?>
-      <li><a href="./pages/logout.php">
-          Logout
-        </a></li>
+      <?php } ?>  
     </ul>
   </nav>
 
   <div class="flex flex-col space-y-6">
-    <button type="button" class='hover:bg-[#302e3d] w-10 h-10 rounded-lg grid place-items-center' id="logout-button">
+    <a href="?page=logout" class='hover:bg-[#302e3d] w-10 h-10 rounded-lg grid place-items-center' id="logout-button">
       Logout
-    </button>
+    </a>
   </div>
 </aside>
 
