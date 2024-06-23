@@ -2,7 +2,7 @@
 
 function selectData($table, $columns = "*", $condition = "", $orderBy = "", $limit = "")
 {
-    global $conn;
+    global $conn_online;
     
     // Bangun query SELECT
     $query = "SELECT $columns FROM $table";
@@ -23,7 +23,7 @@ function selectData($table, $columns = "*", $condition = "", $orderBy = "", $lim
     }
 
     // Persiapan statement
-    $statement = mysqli_prepare($conn, $query);
+    $statement = mysqli_prepare($conn_online, $query);
 
     // Eksekusi statement
     mysqli_stmt_execute($statement);
