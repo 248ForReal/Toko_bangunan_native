@@ -3,8 +3,18 @@
 </h3>
 <div>
 
-  <div class="overflow-x-auto">
-    <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+  <div class="bg-white p-6 rounded-xl">
+    <div class="mb-4">
+      <a href="?page=daftar-barang&act=add" class="text-center py-2 px-4 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-green-700 text-white hover:bg-green-800 disabled:opacity-50 disabled:pointer-events-none transition-all">
+        <i class='bx bx-plus-circle text-[1.1rem] text-white'></i>
+        <span class="text-white">Tambah</span>
+      </a>
+      <a href="" class="text-center py-2 px-4 inline-flex items-center gap-x-1 text-xs font-semibold rounded-lg border bg-white text-neutral-500 hover:bg-neutral-200 disabled:opacity-50 disabled:pointer-events-none transition-all">
+        <i class='bx bx-list-ul text-[1.1rem] text-gray-500'></i>
+        <span class="text-gray-500">Lihat Kategori</span>
+      </a>
+    </div>
+    <table id="datatable-style" class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
       <thead>
         <tr>
           <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Barcode</th>
