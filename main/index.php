@@ -1,18 +1,19 @@
-<?php require "../db/config.php" ?>
-<?php require "./base/routes.php" ?>
-<?php require "../utilities/query-func.php" ?>
-<?php require "../utilities/to-percent.php" ?>
-<?php require "../utilities/auth-func.php" ?>
+  <?php require "../db/config.php" ?>
+  <?php require "./base/routes.php" ?>
+  <?php require "../utilities/query-func.php" ?>
+  <?php require "../utilities/to-percent.php" ?>
+  <?php require "../utilities/auth-func.php" ?>
+  <?php require "../utilities/sync-func.php" ?>
 
-<?php 
-if (!isset($_SESSION['username'])) {
-    header("Location: ../");
-    exit();
-}
-?>
+  <?php 
+  if (!isset($_SESSION['username'])) {
+      header("Location: ../");
+      exit();
+  }
+  ?>
 
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -24,9 +25,9 @@ if (!isset($_SESSION['username'])) {
   <link rel="stylesheet" href="../assets/css/index.css">
 </head>
 
-<body>
-  <?php include "./base/sider.php" ?>
-  <?php include "./main.php" ?>
+  <body>
+    <?php include "./base/sider.php" ?>
+    <?php include "./main.php" ?>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -35,4 +36,4 @@ if (!isset($_SESSION['username'])) {
   new DataTable('#datatable-style');
 </script>
 
-</html>
+  </html>

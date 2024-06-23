@@ -57,5 +57,12 @@ $pages = array(
   'laporan-barang-keluar' => array(
     'default' => 'pages/laporan/barang-keluar/barang-keluar.php'
   ),
+  'logout' => array(
+    'default' => 'action/logout.php'
+  ),
+  'sync' => array(
+    'default' => 'action/sync.php'
+  ),
+
 
 );
