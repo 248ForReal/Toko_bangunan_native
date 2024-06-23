@@ -13,6 +13,7 @@
       foreach ($routes as $i => $v) { ?>
         <li>
           <a href="<?= $v['url'] ?>" class="p-1.5 font-medium focus:outline-none duration-200 hover:scale-90 transition-all flex flex-col items-center gap-1">
+          <a href="<?= $v['url'] ?>" class="p-1.5 font-medium focus:outline-none duration-200 hover:scale-90 transition-all flex flex-col items-center gap-1">
             <?= $v['icon'] ?>
             <span class="block text-white text-xs text-center">
               <?= $v['label'] ?>
@@ -29,5 +30,8 @@
     </a>
   </div>
 </aside>
+
+
+
 
 
