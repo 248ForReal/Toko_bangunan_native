@@ -12,20 +12,25 @@
       <?php
       foreach ($routes as $i => $v) { ?>
         <li>
-          <a href="<?= $v['url'] ?>" class="p-1.5 font-medium focus:outline-nones duration-200 hover:scale-90 transition-all flex flex-col items-center gap-1">
+          <a href="<?= $v['url'] ?>" class="p-1.5 font-medium focus:outline-none duration-200 hover:scale-90 transition-all flex flex-col items-center gap-1">
             <?= $v['icon'] ?>
             <span class="block text-white text-xs text-center">
               <?= $v['label'] ?>
             </span>
           </a>
-        </li>
+        </li>        
       <?php } ?>
+      <li><a href="./pages/logout.php">
+          Logout
+        </a></li>
     </ul>
   </nav>
 
   <div class="flex flex-col space-y-6">
-    <button type="submit" class='hover:bg-[#302e3d] w-10 h-10 rounded-lg grid place-items-center'>
+    <button type="button" class='hover:bg-[#302e3d] w-10 h-10 rounded-lg grid place-items-center' id="logout-button">
       Logout
     </button>
   </div>
 </aside>
+
+

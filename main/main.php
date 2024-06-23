@@ -1,5 +1,6 @@
 <main class="ml-[90px] p-8 bg-[#f2f2f2] min-h-screen">
   <!-- <h3 class="text-2xl font-semibold mb-10">
+    
     <?= $head_title; ?>
   </h3> -->
   <?php
