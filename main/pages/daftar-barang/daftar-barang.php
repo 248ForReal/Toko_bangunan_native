@@ -1,9 +1,7 @@
 <h3 class="text-2xl font-semibold mb-10">
   Daftar Barang
 </h3>
-<div>
-
-  <div class="bg-white p-6 rounded-xl">
+<div class="bg-white p-6 rounded-xl">
     <div class="mb-4">
       <a href="?page=daftar-barang&act=add" class="text-center py-2 px-4 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-green-700 text-white hover:bg-green-800 disabled:opacity-50 disabled:pointer-events-none transition-all">
         <i class='bx bx-plus-circle text-[1.1rem] text-white'></i>
@@ -62,5 +60,3 @@
       </tbody>
     </table>
   </div>
-
-</div>

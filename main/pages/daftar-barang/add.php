@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $harga_modal = $_POST['harga_modal'] ?? '';
   $harga_jual = $_POST['harga_jual'] ?? '';
   $stok = $_POST['stok'] ?? '';
+  $now = date('Y-m-d H:i:s');
 
   $data = array(
       'barcode_barang' => $barcode_barang,
@@ -61,7 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       'kategori_id' => $kategori_id,
       'harga_modal' => $harga_modal,
       'harga_jual' => $harga_jual,
-      'stok' => $stok
+      'stok' => $stok,
+      'createdAt' => $now,
+      'updatedAt' => $now,
   );
 
   $insert_data = insertData('barang', $data);
