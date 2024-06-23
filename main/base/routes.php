@@ -71,6 +71,9 @@ $pages = array(
   'sync' => array(
     'default' => 'action/sync.php'
   ),
+  'struk' => array(
+    'default' => 'pages/kasir/struk.php'
+  )
 
 
 );
