@@ -49,13 +49,25 @@ $pages = array(
     'default' => 'pages/daftar-barang/daftar-barang.php',
     'add' => 'pages/daftar-barang/add.php',
     'edit' => 'pages/daftar-barang/edit.php',
+    'barcode' => 'pages/daftar-barang/barcode.php',
     'delete' => 'pages/daftar-barang/delete.php'
   ),
+  'kategori' => array(
+    'default' => 'pages/kategori/daftar-kategori.php',
+    'add' => 'pages/kategori/add.php',
+    'edit' => 'pages/kategori/edit.php',
+    'barcode' => 'pages/kategori/barcode.php',
+    'delete' => 'pages/kategori/delete.php'
+  ),
   'laporan-barang-masuk' => array(
-    'default' => 'pages/laporan/barang-masuk/barang-masuk.php'
+    'default' => 'pages/laporan/barang-masuk/barang-masuk.php',
+    'add' => 'pages/laporan/barang-masuk/cetak-pdf.php',
+    'delete' => 'pages/laporan/barang-masuk/delete.php'
   ),
   'laporan-barang-keluar' => array(
-    'default' => 'pages/laporan/barang-keluar/barang-keluar.php'
+    'default' => 'pages/laporan/barang-keluar/barang-keluar.php',
+    'add' => 'pages/laporan/barang-keluar/cetak-pdf.php',
+    'delete' => 'pages/laporan/barang-keluar/delete.php'
   ),
   'logout' => array(
     'default' => 'action/logout.php'

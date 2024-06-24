@@ -7,7 +7,7 @@
         <i class='bx bx-plus-circle text-[1.1rem] text-white'></i>
         <span class="text-white">Tambah</span>
       </a>
-      <a href="" class="text-center py-2 px-4 inline-flex items-center gap-x-1 text-xs font-semibold rounded-lg border bg-white text-neutral-500 hover:bg-neutral-200 disabled:opacity-50 disabled:pointer-events-none transition-all">
+      <a href="?page=kategori" class="text-center py-2 px-4 inline-flex items-center gap-x-1 text-xs font-semibold rounded-lg border bg-white text-neutral-500 hover:bg-neutral-200 disabled:opacity-50 disabled:pointer-events-none transition-all">
         <i class='bx bx-list-ul text-[1.1rem] text-gray-500'></i>
         <span class="text-gray-500">Lihat Kategori</span>
       </a>
@@ -35,22 +35,21 @@
         foreach ($listBarang as $row) {
         ?>
           <tr class="odd:bg-gray-50">
-            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"><?= $row['barcode_barang'] ?></td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= $row['nama_barang'] ?></td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= $row['stok'] ?></td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= $row['nama_kategori'] ?></td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= $row['harga_modal'] ?></td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= $row['harga_jual'] ?></td>
+            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"><?= htmlspecialchars($row['barcode_barang']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['nama_barang']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['stok']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['nama_kategori']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['harga_modal']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['harga_jual']) ?></td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
               <div class="flex justify-center items-center gap-2">
-                <a href="" class="rounded-lg px-2 py-1 bg-gray-50 border hover:bg-gray-100 transition-all">
+                <a href="?page=daftar-barang&act=barcode&id=<?= htmlspecialchars($row['barcode_barang']) ?>" class="rounded-lg px-2 py-1 bg-gray-50 border hover:bg-gray-100 transition-all">
                   <i class='bx bx-qr-scan text-gray-500'></i>
                 </a>
-                <a href="?page=daftar-barang&act=edit&id=<?= $row['id'] ?>" class="rounded-lg px-2 py-1 bg-blue-50 border hover:bg-blue-100 transition-all">
+                <a href="?page=daftar-barang&act=edit&id=<?= htmlspecialchars($row['id']) ?>" class="rounded-lg px-2 py-1 bg-blue-50 border hover:bg-blue-100 transition-all">
                   <i class='bx bxs-pencil text-blue-500'></i>
                 </a>
-                <a href="?page=daftar-barang&act=delete&id=<?= $row['id'] ?>" onclick="return confirm
-            ('Apakah anda yakin ingin menghapus ini?');" class="rounded-lg px-2 py-1 bg-red-50 border hover:bg-red-100 transition-all">
+                <a href="?page=daftar-barang&act=delete&id=<?= htmlspecialchars($row['id']) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus ini?');" class="rounded-lg px-2 py-1 bg-red-50 border hover:bg-red-100 transition-all">
                   <i class='bx bxs-trash text-red-500'></i>
                 </a>
               </div>

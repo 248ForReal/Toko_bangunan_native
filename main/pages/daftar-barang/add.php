@@ -1,6 +1,5 @@
 <?php
 $categoriesOpt = selectData('kategori', 'id, nama_kategori');
-
 ?>
 
 <div class="bg-white p-8 rounded-xl shadow-sm w-full max-w-md mx-auto">
@@ -67,11 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       'updatedAt' => $now,
   );
 
-  $insert_data = insertData('barang', $data);
-    if ($insert_data = 1) {
-        echo "<script>alert('Data berhasil ditambahkan!');document.location.href='?page=daftar-barang';</script>";
-    } else {
-        echo "<script>alert('Gagal menambahkan data!');document.location.href='index.php?page=daftar-barang&act=add';</script>";
-    }
+  $new_id = insertData('barang', $data);
+
+  if (empty($barcode_barang)) {
+      $generated_barcode = generateBarcode($new_id);
+      $update_query = "UPDATE barang SET barcode_barang = '$generated_barcode' WHERE id = $new_id";
+      mysqli_query($conn_online, $update_query);
+  }
+
+  echo "<script>alert('Data berhasil ditambahkan!');document.location.href='?page=daftar-barang';</script>";
 }
 ?>
