@@ -14,9 +14,7 @@ foreach ($listTransaksi as $row) {
     $totalJumlahDibayarkan += $row['total_belanja'];
 }
 
-function formatRupiah($number) {
-    return 'Rp ' . number_format($number, 0, ',', '.');
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
