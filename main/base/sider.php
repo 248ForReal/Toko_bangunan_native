@@ -1,3 +1,4 @@
+<?php // Pastikan tidak ada spasi atau baris kosong sebelum tag PHP ini ?>
 <aside class="hidden fixed lg:flex flex-col items-center w-24 h-screen py-8 overflow-y-auto bg-[#262430] border-r">
   <nav class="flex flex-col flex-1 space-y-6">
     <div class='flex flex-col items-center gap-2'>
@@ -31,3 +32,4 @@
     </a>
   </div>
 </aside>
+<?php // Pastikan tidak ada spasi atau baris kosong setelah tag PHP ini ?>

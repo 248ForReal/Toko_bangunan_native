@@ -60,10 +60,14 @@ $pages = array(
     'delete' => 'pages/kategori/delete.php'
   ),
   'laporan-barang-masuk' => array(
-    'default' => 'pages/laporan/barang-masuk/barang-masuk.php'
+    'default' => 'pages/laporan/barang-masuk/barang-masuk.php',
+    'add' => 'pages/laporan/barang-masuk/cetak-pdf.php',
+    'delete' => 'pages/laporan/barang-masuk/delete.php'
   ),
   'laporan-barang-keluar' => array(
-    'default' => 'pages/laporan/barang-keluar/barang-keluar.php'
+    'default' => 'pages/laporan/barang-keluar/barang-keluar.php',
+    'add' => 'pages/laporan/barang-keluar/cetak-pdf.php',
+    'delete' => 'pages/laporan/barang-keluar/delete.php'
   ),
   'logout' => array(
     'default' => 'action/logout.php'
