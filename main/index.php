@@ -4,6 +4,11 @@
   <?php require "../utilities/to-percent.php" ?>
   <?php require "../utilities/auth-func.php" ?>
   <?php require "../utilities/sync-func.php" ?>
+  <?php require "../vendor/autoload.php"?>
+
+
+
+  
 
   <?php 
   if (!isset($_SESSION['username'])) {

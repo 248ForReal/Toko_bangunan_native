@@ -33,7 +33,7 @@ function insertTransaction($table, $data) {
   if ($conn_online->query($sql) === TRUE) {
       $last_id = $conn_online->insert_id;
       // Update stok barang setelah transaksi berhasil
-      updateStockAfterTransaction($data['items']);
+      updateStockAfterTransaction(json_decode($data['items'], true));
       $conn_online->close();
       return $last_id;
   } else {
@@ -130,11 +130,11 @@ function updateStockAfterTransaction($items) {
   global $conn_online;
 
   foreach ($items as $item) {
-      $barang_id = $item['id'];
+      $barcode_barang = $item['barcode_barang'];
       $quantity = $item['quantity'];
 
-      // Ambil stok saat ini
-      $sql = "SELECT stok FROM barang WHERE id = $barang_id";
+      // Ambil stok saat ini berdasarkan barcode_barang
+      $sql = "SELECT stok FROM barang WHERE barcode_barang = '$barcode_barang'";
       $result = $conn_online->query($sql);
 
       if ($result->num_rows > 0) {
@@ -145,12 +145,11 @@ function updateStockAfterTransaction($items) {
           $stok_baru = $stok_sekarang - $quantity;
 
           // Update stok di database
-          $update_sql = "UPDATE barang SET stok = $stok_baru WHERE id = $barang_id";
+          $update_sql = "UPDATE barang SET stok = $stok_baru WHERE barcode_barang = '$barcode_barang'";
           $conn_online->query($update_sql);
       }
   }
 }
-
 
 loadCartFromJson();
 $cartItems = getCartItems();
