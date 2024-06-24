@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <img src="./assets/images/logo.png" alt="" class="w-fit h-fit scale-50 mx-auto object-cover" />
           <h1 class="mb-3 -mt-10 text-2xl md:text-4xl lg:text-4xl font-bold">Masuk</h1>
           <p class="text-xs md:text-sm lg:text-sm">Sistem POS Toko Bangunan Sumber Rezeki Rokan Hulu</p>
+          <p class="text-xs md:text-sm lg:text-sm text-gray-500">(Offline)</p>
         </div>
         <form method="post" action="" class="space-y-12">
           <div class="space-y-4">
