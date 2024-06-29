@@ -24,20 +24,20 @@ function getCartItems()
 }
 
 function insertTransaction($table, $data) {
-  global $conn_online;
+  global $conn_offline;
   $columns = implode(", ", array_keys($data));
   $values = "'" . implode("', '", array_values($data)) . "'";
 
   $sql = "INSERT INTO $table ($columns) VALUES ($values)";
   
-  if ($conn_online->query($sql) === TRUE) {
-      $last_id = $conn_online->insert_id;
+  if ($conn_offline->query($sql) === TRUE) {
+      $last_id = $conn_offline->insert_id;
       // Update stok barang setelah transaksi berhasil
       updateStockAfterTransaction(json_decode($data['items'], true));
-      $conn_online->close();
+      $conn_offline->close();
       return $last_id;
   } else {
-      $conn_online->close();
+      $conn_offline->close();
       return 0;
   }
 }
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_to_transaction
 }
 
 function updateStockAfterTransaction($items) {
-  global $conn_online;
+  global $conn_offline;
 
   foreach ($items as $item) {
       $barcode_barang = $item['barcode_barang'];
@@ -135,7 +135,7 @@ function updateStockAfterTransaction($items) {
 
       // Ambil stok saat ini berdasarkan barcode_barang
       $sql = "SELECT stok FROM barang WHERE barcode_barang = '$barcode_barang'";
-      $result = $conn_online->query($sql);
+      $result = $conn_offline->query($sql);
 
       if ($result->num_rows > 0) {
           $row = $result->fetch_assoc();
@@ -146,7 +146,7 @@ function updateStockAfterTransaction($items) {
 
           // Update stok di database
           $update_sql = "UPDATE barang SET stok = $stok_baru WHERE barcode_barang = '$barcode_barang'";
-          $conn_online->query($update_sql);
+          $conn_offline->query($update_sql);
       }
   }
 }

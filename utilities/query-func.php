@@ -2,7 +2,7 @@
 
     function selectData($table, $columns = "*", $join = "", $condition = "", $orderBy = "", $limit = "")
     {
-        global $conn_online;
+        global $conn_offline;
 
         // Bangun query SELECT
         $query = "SELECT $columns FROM $table";
@@ -28,7 +28,7 @@
         }
 
         // Persiapan statement
-        $statement = mysqli_prepare($conn_online, $query);
+        $statement = mysqli_prepare($conn_offline, $query);
 
         // Eksekusi statement
         mysqli_stmt_execute($statement);
@@ -59,16 +59,16 @@
 
     function insertData($table, $data)
     {
-        global $conn_online;
+        global $conn_offline;
 
         // Escape nama tabel
-        $table = mysqli_real_escape_string($conn_online, $table);
+        $table = mysqli_real_escape_string($conn_offline, $table);
 
         // Escape data
         $escapedData = array();
         foreach ($data as $column => $value) {
-            $escapedColumn = mysqli_real_escape_string($conn_online, $column);
-            $escapedValue = mysqli_real_escape_string($conn_online, $value);
+            $escapedColumn = mysqli_real_escape_string($conn_offline, $column);
+            $escapedValue = mysqli_real_escape_string($conn_offline, $value);
             $escapedData[$escapedColumn] = $escapedValue;
         }
 
@@ -78,7 +78,7 @@
         $query = "INSERT INTO $table ($columns) VALUES ($values)";
 
         // Persiapan statement
-        $statement = mysqli_prepare($conn_online, $query);
+        $statement = mysqli_prepare($conn_offline, $query);
 
         // Eksekusi statement
         mysqli_stmt_execute($statement);
@@ -91,21 +91,21 @@
         // Tutup statement
         mysqli_stmt_close($statement);
 
-        return mysqli_insert_id($conn_online); // Mengembalikan ID yang baru dimasukkan
+        return mysqli_insert_id($conn_offline); // Mengembalikan ID yang baru dimasukkan
     }
 
     function updateData($table, $data, $condition)
     {
-        global $conn_online;
+        global $conn_offline;
 
         // Escape nama tabel
-        $table = mysqli_real_escape_string($conn_online, $table);
+        $table = mysqli_real_escape_string($conn_offline, $table);
 
         // Escape data
         $escapedData = array();
         foreach ($data as $column => $value) {
-            $escapedColumn = mysqli_real_escape_string($conn_online, $column);
-            $escapedValue = mysqli_real_escape_string($conn_online, $value);
+            $escapedColumn = mysqli_real_escape_string($conn_offline, $column);
+            $escapedValue = mysqli_real_escape_string($conn_offline, $value);
             $escapedData[] = "$escapedColumn = '$escapedValue'";
         }
 
@@ -114,7 +114,7 @@
         $query = "UPDATE $table SET $setClause WHERE $condition";
 
         // Persiapan statement
-        $statement = mysqli_prepare($conn_online, $query);
+        $statement = mysqli_prepare($conn_offline, $query);
 
         // Eksekusi statement
         mysqli_stmt_execute($statement);
@@ -130,16 +130,16 @@
 
     function deleteData($table, $condition)
     {
-        global $conn_online;
+        global $conn_offline;
 
         // Escape nama tabel
-        $table = mysqli_real_escape_string($conn_online, $table);
+        $table = mysqli_real_escape_string($conn_offline, $table);
 
         // Bangun query DELETE
         $query = "DELETE FROM $table WHERE $condition";
 
         // Persiapan statement
-        $statement = mysqli_prepare($conn_online, $query);
+        $statement = mysqli_prepare($conn_offline, $query);
 
         // Eksekusi statement
         mysqli_stmt_execute($statement);
@@ -155,13 +155,13 @@
 
     function countData($table)
     {
-        global $conn_online;
+        global $conn_offline;
 
         // Bangun query COUNT
         $query = "SELECT COUNT(*) as count FROM $table";
 
         // Persiapan statement
-        $statement = mysqli_prepare($conn_online, $query);
+        $statement = mysqli_prepare($conn_offline, $query);
 
         // Eksekusi statement
         mysqli_stmt_execute($statement);
@@ -179,13 +179,13 @@
 
     function getLatestTransactions()
     {
-        global $conn_online;
+        global $conn_offline;
 
         // Bangun query SELECT
         $query = "SELECT id, total_belanja, kembalian FROM transaksi ORDER BY createdAt DESC LIMIT 10";
 
         // Persiapan statement
-        $statement = mysqli_prepare($conn_online, $query);
+        $statement = mysqli_prepare($conn_offline, $query);
 
         // Eksekusi statement
         mysqli_stmt_execute($statement);
@@ -216,10 +216,10 @@
     // Function to get total costs
     function getTotalCosts($startDate, $endDate)
     {
-        global $conn_online;
+        global $conn_offline;
 
         $query = "SELECT items FROM transaksi WHERE createdAt BETWEEN ? AND ?";
-        $statement = mysqli_prepare($conn_online, $query);
+        $statement = mysqli_prepare($conn_offline, $query);
         mysqli_stmt_bind_param($statement, "ss", $startDate, $endDate);
         mysqli_stmt_execute($statement);
 
@@ -244,10 +244,10 @@
     // Function to get item cost
     function getItemCost($barcode_barang)
     {
-        global $conn_online;
+        global $conn_offline;
 
         $query = "SELECT harga_modal FROM barang WHERE barcode_barang = ?";
-        $statement = mysqli_prepare($conn_online, $query);
+        $statement = mysqli_prepare($conn_offline, $query);
         mysqli_stmt_bind_param($statement, "s", $barcode_barang);
         mysqli_stmt_execute($statement);
 
@@ -261,10 +261,10 @@
     // Function to get total sales
     function getTotalSales($startDate, $endDate)
     {
-        global $conn_online;
+        global $conn_offline;
 
         $query = "SELECT SUM(total_belanja) as total_sales FROM transaksi WHERE createdAt BETWEEN ? AND ?";
-        $statement = mysqli_prepare($conn_online, $query);
+        $statement = mysqli_prepare($conn_offline, $query);
         mysqli_stmt_bind_param($statement, "ss", $startDate, $endDate);
         mysqli_stmt_execute($statement);
 

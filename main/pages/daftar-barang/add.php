@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (empty($barcode_barang)) {
       $generated_barcode = generateBarcode($new_id);
       $update_query = "UPDATE barang SET barcode_barang = '$generated_barcode' WHERE id = $new_id";
-      mysqli_query($conn_online, $update_query);
+      mysqli_query($conn_offline, $update_query);
   }
 
   echo "<script>alert('Data berhasil ditambahkan!');document.location.href='?page=daftar-barang';</script>";

@@ -2,15 +2,15 @@
 session_start();
 
 function register($nama_admin, $username, $password, $role) {
-    global $conn_online;
+    global $conn_offline;
     
-    $nama_admin = mysqli_real_escape_string($conn_online, $nama_admin);
-    $username = mysqli_real_escape_string($conn_online, $username);
-    $password = password_hash(mysqli_real_escape_string($conn_online, $password), PASSWORD_BCRYPT);
-    $role = mysqli_real_escape_string($conn_online, $role);
+    $nama_admin = mysqli_real_escape_string($conn_offline, $nama_admin);
+    $username = mysqli_real_escape_string($conn_offline, $username);
+    $password = password_hash(mysqli_real_escape_string($conn_offline, $password), PASSWORD_BCRYPT);
+    $role = mysqli_real_escape_string($conn_offline, $role);
     
     $query = "INSERT INTO admins (nama_admin, username, password, role, createdAt, updatedAt) VALUES (?, ?, ?, ?, NOW(), NOW())";
-    $statement = mysqli_prepare($conn_online, $query);
+    $statement = mysqli_prepare($conn_offline, $query);
     mysqli_stmt_bind_param($statement, "ssss", $nama_admin, $username, $password, $role);
     
     if (mysqli_stmt_execute($statement)) {
@@ -24,12 +24,12 @@ function register($nama_admin, $username, $password, $role) {
 }
 
 function login($username, $password) {
-    global $conn_online;
+    global $conn_offline;
     
-    $username = mysqli_real_escape_string($conn_online, $username);
+    $username = mysqli_real_escape_string($conn_offline, $username);
     
     $query = "SELECT * FROM admins WHERE username = ?";
-    $statement = mysqli_prepare($conn_online, $query);
+    $statement = mysqli_prepare($conn_offline, $query);
     mysqli_stmt_bind_param($statement, "s", $username);
     mysqli_stmt_execute($statement);
     $result = mysqli_stmt_get_result($statement);
@@ -42,10 +42,10 @@ function login($username, $password) {
             header("Location: main/");
             exit();
         } else {
-            echo "Kata sandi salah.";
+            echo "<script>alert('Kata sandi salah!');document.location.href='./';</script>";
         }
     } else {
-        echo "Nama pengguna tidak ditemukan.";
+        echo "<script>alert('Nama pengguna tidak ditemukan!');document.location.href='./';</script>";
     }
     
     mysqli_stmt_close($statement);

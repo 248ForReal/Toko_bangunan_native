@@ -1,0 +1,22 @@
+{
+  "name": "toko-bangunan-offline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./assets/css/index.css -o ./assets/css/tailwindbuild.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "datatables.net-dt": "^2.0.8",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4"
+  },
+  "dependencies": {
+    "datatables.net": "^2.0.8",
+    "jquery": "^3.7.1"
+  }
+}
