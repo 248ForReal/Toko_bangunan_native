@@ -142,6 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_to_transaction
 
 function updateStockAfterTransaction($items) {
   global $conn_offline;
+  global $conn_offline;
 
   foreach ($items as $item) {
       $barcode_barang = $item['barcode_barang'];
@@ -150,6 +151,7 @@ function updateStockAfterTransaction($items) {
 
       // Ambil stok saat ini berdasarkan barcode_barang
       $sql = "SELECT stok FROM barang WHERE barcode_barang = '$barcode_barang'";
+      $result = $conn_offline->query($sql);
       $result = $conn_offline->query($sql);
 
       if ($result->num_rows > 0) {
@@ -161,6 +163,7 @@ function updateStockAfterTransaction($items) {
 
           // Update stok di database
           $update_sql = "UPDATE barang SET stok = $stok_baru WHERE barcode_barang = '$barcode_barang'";
+          $conn_offline->query($update_sql);
           $conn_offline->query($update_sql);
       }
   }

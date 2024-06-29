@@ -42,10 +42,10 @@ function login($username, $password) {
             header("Location: main/");
             exit();
         } else {
-            echo "Kata sandi salah.";
+            echo "<script>alert('Kata sandi salah!');document.location.href='./';</script>";
         }
     } else {
-        echo "Nama pengguna tidak ditemukan.";
+        echo "<script>alert('Nama pengguna tidak ditemukan!');document.location.href='./';</script>";
     }
     
     mysqli_stmt_close($statement);

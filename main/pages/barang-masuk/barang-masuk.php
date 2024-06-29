@@ -71,6 +71,7 @@ function saveTransactionMasuk($totalBelanja, $kembalian, $items)
 function updateStockAfterTransactionMasuk($items)
 {
     global $conn_offline;
+    global $conn_offline;
 
     foreach ($items as $item) {
         $barcode_barang = $item['barcode_barang'];
@@ -78,12 +79,14 @@ function updateStockAfterTransactionMasuk($items)
 
         $sql = "SELECT stok FROM barang WHERE barcode_barang = '$barcode_barang'";
         $result = $conn_offline->query($sql);
+        $result = $conn_offline->query($sql);
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $stok_sekarang = $row['stok'];
             $stok_baru = $stok_sekarang + $quantity;
             $update_sql = "UPDATE barang SET stok = $stok_baru WHERE barcode_barang = '$barcode_barang'";
+            $conn_offline->query($update_sql);
             $conn_offline->query($update_sql);
         }
     }

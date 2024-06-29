@@ -3,7 +3,7 @@
 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 $action = isset($_GET['act']) ? $_GET['act'] : 'default';
 
-$routes = array(
+$routes  = array(
   array(
     'url' => './',
     'icon' => '<i class=\'text-[1.25rem] text-white bx bxs-grid-alt\'></i>',

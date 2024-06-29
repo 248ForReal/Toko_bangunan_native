@@ -3,9 +3,9 @@
   <nav class="flex flex-col flex-1 space-y-6">
     <div class='flex flex-col items-center gap-2'>
       <a href="#">
-        <img class="object-cover w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=880&h=880&q=100" alt="" />
+        <img class="object-cover w-8 h-8 rounded-full" src="../assets/images/avatar.webp" alt="" />
       </a>
-      <span class='block text-center text-sm text-white capitalize'>admin</span>
+      <span class='block text-center text-sm text-white capitalize'><?=$_SESSION['username']?></span>
     </div>
     <div class='w-full h-[1px] bg-[#575376] mx-auto'></div>
 
