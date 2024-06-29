@@ -145,6 +145,7 @@ function updateStockAfterTransaction($items) {
 
   foreach ($items as $item) {
       $barcode_barang = $item['barcode_barang'];
+      $barcode_barang = $item['barcode_barang'];
       $quantity = $item['quantity'];
 
       // Ambil stok saat ini berdasarkan barcode_barang
