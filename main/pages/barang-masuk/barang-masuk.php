@@ -22,15 +22,30 @@ function getCartItems()
 
 function insertTransactionMasuk($table, $data)
 {
-    global $conn_online;
-    $columns = implode(", ", array_keys($data));
-    $values = "'" . implode("', '", array_values($data)) . "'";
+    global $conn_offline;
+   
+
+    $escapedData = array();
+    foreach ($data as $column => $value) {
+        $escapedColumn = mysqli_real_escape_string($conn_offline, $column);
+        $escapedValue = mysqli_real_escape_string($conn_offline, $value);
+        $escapedData[$escapedColumn] = $escapedValue;
+    }
+
+    $columns = implode(", ", array_keys($escapedData));
+    $values = "'" . implode("', '", array_values($escapedData)) . "'";
 
     $sql = "INSERT INTO $table ($columns) VALUES ($values)";
-    
-    if ($conn_online->query($sql) === TRUE) {
-        $last_id = $conn_online->insert_id;
+
+    if ($conn_offline->query($sql) === TRUE) {
+        $last_id = $conn_offline->insert_id;
+        
+        // Update stok barang setelah transaksi berhasil
         updateStockAfterTransactionMasuk(json_decode($data['items'], true));
+
+        // Panggil fungsi mirrorTable setelah insert
+      
+
         return $last_id;
     } else {
         return 0;
@@ -55,21 +70,21 @@ function saveTransactionMasuk($totalBelanja, $kembalian, $items)
 
 function updateStockAfterTransactionMasuk($items)
 {
-    global $conn_online;
+    global $conn_offline;
 
     foreach ($items as $item) {
         $barcode_barang = $item['barcode_barang'];
         $quantity = $item['quantity'];
 
         $sql = "SELECT stok FROM barang WHERE barcode_barang = '$barcode_barang'";
-        $result = $conn_online->query($sql);
+        $result = $conn_offline->query($sql);
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $stok_sekarang = $row['stok'];
             $stok_baru = $stok_sekarang + $quantity;
             $update_sql = "UPDATE barang SET stok = $stok_baru WHERE barcode_barang = '$barcode_barang'";
-            $conn_online->query($update_sql);
+            $conn_offline->query($update_sql);
         }
     }
 }

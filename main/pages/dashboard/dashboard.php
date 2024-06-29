@@ -37,7 +37,7 @@ $latestTransactions = getLatestTransactions();
     </h3>
 
     <!-- Tambahkan tautan sinkronisasi -->
-    <a href="?page=sync" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6 inline-block">
+    <a href="?page=sync" id="sync-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-6 inline-block">
         Sinkronisasi
     </a>
 
@@ -104,3 +104,28 @@ $latestTransactions = getLatestTransactions();
         <?php endif; ?>
     </div>
 </div>
+
+<script>
+    function isInternetAvailable() {
+        return fetch('https://www.google.com', {mode: 'no-cors'})
+            .then(() => true)
+            .catch(() => false);
+    }
+
+    function updateSyncButton() {
+        const syncButton = document.getElementById('sync-button');
+        isInternetAvailable().then((connected) => {
+            if (connected) {
+                syncButton.classList.remove('bg-gray-500', 'cursor-not-allowed');
+                syncButton.classList.add('bg-blue-500', 'hover:bg-blue-700');
+                syncButton.removeAttribute('disabled');
+            } else {
+                syncButton.classList.remove('bg-blue-500', 'hover:bg-blue-700');
+                syncButton.classList.add('bg-gray-500', 'cursor-not-allowed');
+                syncButton.setAttribute('disabled', 'true');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', updateSyncButton);
+</script>

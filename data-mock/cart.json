@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "id": "1",
+        "barcode_barang": "1234567891",
+        "nama_barang": "kran Taman Steinless",
+        "kategori_id": "1",
+        "harga_jual": "15000",
+        "quantity": 1
+    }
+]

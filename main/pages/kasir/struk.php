@@ -2,16 +2,16 @@
 
 function getTransactionById($id)
 {
-  global $conn_online;
+  global $conn_offline;
   $sql = "SELECT * FROM transaksi WHERE id = $id";
-  $result = $conn_online->query($sql);
+  $result = $conn_offline->query($sql);
 
   if ($result->num_rows > 0) {
     $transaction = $result->fetch_assoc();
-    $conn_online->close();
+    $conn_offline->close();
     return $transaction;
   } else {
-    $conn_online->close();
+    $conn_offline->close();
     return null;
   }
 }

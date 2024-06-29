@@ -1,5 +1,5 @@
 <h3 class="text-2xl font-semibold mb-10">
-  Daftar Transakso barang_masuk
+  Daftar Transaksi barang masuk
 </h3>
 <div class="bg-white p-6 rounded-xl">
   <div class="mb-4 flex gap-4">

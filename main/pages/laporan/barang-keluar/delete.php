@@ -25,10 +25,10 @@ if ($transaction) {
 
 function getTransactionById($id)
 {
-    global $conn_online;
-    $id = mysqli_real_escape_string($conn_online, $id);
+    global $conn_offline;
+    $id = mysqli_real_escape_string($conn_offline, $id);
     $query = "SELECT * FROM transaksi WHERE id = $id";
-    $result = mysqli_query($conn_online, $query);
+    $result = mysqli_query($conn_offline, $query);
 
     if ($result) {
         return mysqli_fetch_assoc($result);
@@ -39,23 +39,23 @@ function getTransactionById($id)
 
 function updateStock($barcode, $quantity)
 {
-    global $conn_online;
-    $barcode = mysqli_real_escape_string($conn_online, $barcode);
+    global $conn_offline;
+    $barcode = mysqli_real_escape_string($conn_offline, $barcode);
     $quantity = (int)$quantity;
     $query = "UPDATE barang SET stok = stok + $quantity WHERE barcode_barang = $barcode";
-    mysqli_query($conn_online, $query);
+    mysqli_query($conn_offline, $query);
 
-    if (mysqli_errno($conn_online)) {
-        die("Error: " . mysqli_error($conn_online));
+    if (mysqli_errno($conn_offline)) {
+        die("Error: " . mysqli_error($conn_offline));
     }
 }
 
 function deleteDatas($table, $condition)
 {
-    global $conn_online;
-    $table = mysqli_real_escape_string($conn_online, $table);
+    global $conn_offline;
+    $table = mysqli_real_escape_string($conn_offline, $table);
     $query = "DELETE FROM $table WHERE $condition";
-    $statement = mysqli_prepare($conn_online, $query);
+    $statement = mysqli_prepare($conn_offline, $query);
 
     mysqli_stmt_execute($statement);
 
