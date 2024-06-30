@@ -23,24 +23,51 @@ function getCartItems()
     }
 }
 
+
 function insertTransaction($table, $data) {
   global $conn_online;
-  $columns = implode(", ", array_keys($data));
-  $values = "'" . implode("', '", array_values($data)) . "'";
+  global $conn_offline;
+  $tables = [
+      'admins' => 'id',
+      'barang' => 'id',
+      'kategori' => 'id',
+      'transaksi' => 'id',
+      'transaksi_barang' => 'id'
+  ];
+
+  // Escape nama tabel dan data untuk menghindari injeksi SQL
+  $table = mysqli_real_escape_string($conn_online, $table);
+  $escapedData = array();
+  foreach ($data as $column => $value) {
+      $escapedColumn = mysqli_real_escape_string($conn_online, $column);
+      $escapedValue = mysqli_real_escape_string($conn_online, $value);
+      $escapedData[$escapedColumn] = $escapedValue;
+  }
+
+  $columns = implode(", ", array_keys($escapedData));
+  $values = "'" . implode("', '", array_values($escapedData)) . "'";
 
   $sql = "INSERT INTO $table ($columns) VALUES ($values)";
-  
+
   if ($conn_online->query($sql) === TRUE) {
       $last_id = $conn_online->insert_id;
+      
       // Update stok barang setelah transaksi berhasil
       updateStockAfterTransaction(json_decode($data['items'], true));
-      $conn_online->close();
+
+      // Panggil fungsi mirrorTable setelah insert
+      if (array_key_exists($table, $tables)) {
+          mirrorTable($conn_online, $conn_offline, $table, $tables[$table]);
+      }
+
       return $last_id;
   } else {
-      $conn_online->close();
       return 0;
   }
 }
+
+
+
 
 
 function saveTransaction($totalBelanja, $jumlahDibayarkan, $kembalian, $items)
