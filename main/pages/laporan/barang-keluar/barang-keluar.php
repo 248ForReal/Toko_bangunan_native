@@ -13,53 +13,55 @@
       </a>
     </div>
   </div>
-  <table id="datatable-style" class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-    <thead>
-      <tr>
-        <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">ID Transaksi</th>
-        <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Total Belanja</th>
-        <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Jumlah Dibayarkan</th>
-        <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Kembalian</th>
-        <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Items</th>
-        <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Tanggal Transaksi</th>
-        <th class="whitespace-nowrap text-center px-4 py-2 font-semibold text-gray-900">Aksi</th>
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-gray-200">
-      <?php
-      $listTransaksi = selectData("transaksi");
-      foreach ($listTransaksi as $row) {
-        $items = json_decode($row['items'], true);
-      ?>
-        <tr class="odd:bg-gray-50">
-          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"><?= htmlspecialchars($row['id']) ?></td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['total_belanja']) ?></td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['jumlah_dibayarkan']) ?></td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['kembalian']) ?></td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-            <ul class="list-disc pl-5">
-              <?php foreach ($items as $item) { ?>
-                <li>
-                  <?= htmlspecialchars($item['nama_barang']) ?> - <?= htmlspecialchars($item['quantity']) ?> x <?= htmlspecialchars(number_format($item['harga_jual'])) ?>
-                </li>
-              <?php } ?>
-            </ul>
-          </td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['createdAt']) ?></td>
-          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-            <div class="flex justify-center items-center gap-2">
-              <a href="?page=struk&id=<?= htmlspecialchars($row['id']) ?>" class="rounded-lg px-2 py-1 bg-gray-50 border hover:bg-gray-100 transition-all">
-                <i class='bx bx-printer text-gray-500'></i>
-              </a>
-              <a href="?page=laporan-barang-keluar&act=delete&id=<?= htmlspecialchars($row['id']) ?>" class="rounded-lg px-2 py-1 bg-red-50 border border-red-200 hover:bg-red-100 transition-all" onclick="return confirm('Anda yakin ingin menghapus transaksi ini?')">
-                <i class='bx bx-trash text-red-500'></i>
-              </a>
-            </div>
-          </td>
+  <div class="overflow-x-auto">
+    <table id="datatable-style" class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+      <thead>
+        <tr>
+          <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">ID Transaksi</th>
+          <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Total Belanja</th>
+          <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Jumlah Dibayarkan</th>
+          <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Kembalian</th>
+          <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Items</th>
+          <th class="whitespace-nowrap text-left px-4 py-2 font-semibold text-gray-900">Tanggal Transaksi</th>
+          <th class="whitespace-nowrap text-center px-4 py-2 font-semibold text-gray-900">Aksi</th>
         </tr>
-      <?php } ?>
-    </tbody>
-  </table>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <?php
+        $listTransaksi = selectData("transaksi");
+        foreach ($listTransaksi as $row) {
+          $items = json_decode($row['items'], true);
+        ?>
+          <tr class="odd:bg-gray-50">
+            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"><?= htmlspecialchars($row['id']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['total_belanja']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['jumlah_dibayarkan']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['kembalian']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <ul class="list-disc pl-5">
+                <?php foreach ($items as $item) { ?>
+                  <li>
+                    <?= htmlspecialchars($item['nama_barang']) ?> - <?= htmlspecialchars($item['quantity']) ?> x <?= htmlspecialchars(number_format($item['harga_jual'])) ?>
+                  </li>
+                <?php } ?>
+              </ul>
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?= htmlspecialchars($row['createdAt']) ?></td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              <div class="flex justify-center items-center gap-2">
+                <a href="?page=struk&id=<?= htmlspecialchars($row['id']) ?>" class="rounded-lg px-2 py-1 bg-gray-50 border hover:bg-gray-100 transition-all">
+                  <i class='bx bx-printer text-gray-500'></i>
+                </a>
+                <a href="?page=laporan-barang-keluar&act=delete&id=<?= htmlspecialchars($row['id']) ?>" class="rounded-lg px-2 py-1 bg-red-50 border border-red-200 hover:bg-red-100 transition-all" onclick="return confirm('Anda yakin ingin menghapus transaksi ini?')">
+                  <i class='bx bx-trash text-red-500'></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 
