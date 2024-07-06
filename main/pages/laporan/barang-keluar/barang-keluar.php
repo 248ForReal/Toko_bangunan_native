@@ -64,20 +64,28 @@
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const startDateInput = document.getElementById('start-date');
-    const endDateInput = document.getElementById('end-date');
-    const pdfLink = document.getElementById('pdf-link');
+document.addEventListener("DOMContentLoaded", function() {
+  const startDateInput = document.getElementById('start-date');
+  const endDateInput = document.getElementById('end-date');
+  const pdfLink = document.getElementById('pdf-link');
 
-    // Fungsi untuk memperbarui href pada link "Cetak PDF"
-    function updatePdfLink() {
-      const startDate = startDateInput.value;
-      const endDate = endDateInput.value;
-      pdfLink.href = `?page=laporan-barang-keluar&act=add&start_date=${startDate}&end_date=${endDate}`;
+  function updatePdfLink() {
+    const startDate = startDateInput.value;
+    let endDate = endDateInput.value;
+
+  
+    if (endDate) {
+      let endDateObj = new Date(endDate);
+      endDateObj.setDate(endDateObj.getDate() + 1);
+      endDate = endDateObj.toISOString().split('T')[0]; 
     }
 
-    // Event listener untuk perubahan nilai pada input tanggal
-    startDateInput.addEventListener('change', updatePdfLink);
-    endDateInput.addEventListener('change', updatePdfLink);
-  });
+    pdfLink.href = `?page=laporan-barang-keluar&act=add&start_date=${startDate}&end_date=${endDate}`;
+  }
+  startDateInput.addEventListener('change', updatePdfLink);
+  endDateInput.addEventListener('change', updatePdfLink);
+
+  updatePdfLink();
+});
+
 </script>
