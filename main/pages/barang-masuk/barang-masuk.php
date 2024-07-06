@@ -4,20 +4,20 @@ function saveCartToJson()
 {
     $cartItems = getCartItems();
     $jsonData = json_encode($cartItems, JSON_PRETTY_PRINT);
-    file_put_contents('../data-mock/cart.json', $jsonData);
+    file_put_contents('../data-mock/cartIn.json', $jsonData);
 }
 
 function loadCartFromJson()
 {
-    if (file_exists('../data-mock/cart.json')) {
-        $jsonData = file_get_contents('../data-mock/cart.json');
-        $_SESSION['cart'] = json_decode($jsonData, true);
+    if (file_exists('../data-mock/cartIn.json')) {
+        $jsonData = file_get_contents('../data-mock/cartIn.json');
+        $_SESSION['cartIn'] = json_decode($jsonData, true);
     }
 }
 
 function getCartItems()
 {
-    return isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+    return isset($_SESSION['cartIn']) ? $_SESSION['cartIn'] : [];
 }
 
 function insertTransactionMasuk($table, $data)
@@ -111,14 +111,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'quantity' => 1
         ];
 
-        $_SESSION['cart'][] = $item;
+        $_SESSION['cartIn'][] = $item;
         saveCartToJson();
     }
 
     if (isset($_POST['update_quantity'])) {
         $index = $_POST['item_index'];
         $action = $_POST['update_quantity'];
-        $quantity = $_SESSION['cart'][$index]['quantity'];
+        $quantity = $_SESSION['cartIn'][$index]['quantity'];
 
         if ($action === 'increase') {
             $quantity++;
@@ -126,27 +126,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $quantity--;
         }
 
-        $_SESSION['cart'][$index]['quantity'] = $quantity;
+        $_SESSION['cartIn'][$index]['quantity'] = $quantity;
         saveCartToJson();
     }
 
     if (isset($_POST['remove_from_cart'])) {
         $index = $_POST['item_index'];
 
-        if (isset($_SESSION['cart'][$index])) {
-            array_splice($_SESSION['cart'], $index, 1);
+        if (isset($_SESSION['cartIn'][$index])) {
+            array_splice($_SESSION['cartIn'], $index, 1);
             saveCartToJson();
         }
     }
 
     if (isset($_POST['submit_to_transaction'])) {
         $jumlahDibayarkan = floatval($_POST['jumlah_dibayarkan']);
-        $totalBelanja = array_reduce($_SESSION['cart'], function ($carry, $item) {
+        $totalBelanja = array_reduce($_SESSION['cartIn'], function ($carry, $item) {
             return $carry + ($item['harga_modal'] * $item['quantity']);
         }, 0);
 
         if ($jumlahDibayarkan < $totalBelanja) {
-            echo "<script>alert('Saldo tidak mencukupi!');document.location.href='index.php?page=kasir';</script>";
+            echo "<script>alert('Saldo tidak mencukupi!');document.location.href='index.php?page=barang-masuk';</script>";
         } else {
             $kembalian = $jumlahDibayarkan - $totalBelanja;
             $items = getCartItems();
@@ -154,11 +154,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $insert_data = saveTransactionMasuk($totalBelanja, $kembalian, $items);
 
             if ($insert_data != 0) {
-                $_SESSION['cart'] = [];
+                $_SESSION['cartIn'] = [];
                 saveCartToJson();
                 echo "<script>alert('Transaksi berhasil.');document.location.href='?page=barang-masuk';</script>";
             } else {
-                echo "<script>alert('Gagal menyimpan transaksi!');document.location.href='index.php?page=kasir';</script>";
+                echo "<script>alert('Gagal menyimpan transaksi!');document.location.href='index.php?page=barang-masuk';</script>";
             }
         }
     }

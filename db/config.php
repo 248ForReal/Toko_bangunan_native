@@ -13,9 +13,9 @@ if ($conn_offline->connect_errno) {
 }
 
 DEFINE("HOST_ONLINE", "sql12.freesqldatabase.com");
-DEFINE("USER_ONLINE", "sql12716932");
-DEFINE("PASS_ONLINE", "tdFg3LQ7qZ");
-DEFINE("DB_ONLINE", "sql12716932");
+DEFINE("USER_ONLINE", "sql12718219");
+DEFINE("PASS_ONLINE", "7vkG6u59GE");
+DEFINE("DB_ONLINE", "sql12718219");
 
 $conn_online = new mysqli(HOST_ONLINE, USER_ONLINE, PASS_ONLINE, DB_ONLINE);
 
