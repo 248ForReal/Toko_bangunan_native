@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('Asia/Jakarta');
 
 DEFINE("HOST_OFFLINE", "localhost");
 DEFINE("USER_OFFLINE", "root");
