@@ -25,26 +25,31 @@ if (isset($_GET['id'])) {
 ?>
 
 <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+  <div class="mb-6 text-center">
+    <h1 class="text-xl font-bold text-center mb-2">Struk Transaksi</h1>
+    <h1 class="text-base font-medium">Toko Bangunan Sumber Rezeki</h1>
+    <p class="text-sm">Jl Rokan Hulu</p>
+    <p class="text-sm">Pemilik: Adi</p>
+  </div>
   <?php if ($transaction) : ?>
-    <h1 class="text-2xl font-bold text-center mb-4">Struk Transaksi</h1>
     <div class="mb-4">
       <p class="text-sm">ID Transaksi: <span class="font-semibold"><?= $transaction['id'] ?></span></p>
       <p class="text-sm">Waktu Transaksi: <span class="font-semibold"><?= $transaction['createdAt'] ?></span></p>
     </div>
 
     <div class="mb-4">
-      <h2 class="text-xl font-semibold">Total Belanja</h2>
-      <p class="text-lg font-semibold text-gray-700">Rp. <?= number_format($transaction['total_belanja'], 2, ',', '.') ?></p>
+      <h2 class="text-base font-semibold">Total Belanja</h2>
+      <p class="text-base font-semibold text-gray-700">Rp. <?= number_format($transaction['total_belanja'], 2, ',', '.') ?></p>
     </div>
 
     <div class="mb-4">
-      <h2 class="text-xl font-semibold">Pembayaran</h2>
+      <h2 class="text-base font-semibold">Pembayaran</h2>
       <p class="text-sm">Jumlah Dibayarkan: <span class="font-semibold">Rp. <?= number_format($transaction['jumlah_dibayarkan'], 2, ',', '.') ?></span></p>
       <p class="text-sm">Kembalian: <span class="font-semibold">Rp. <?= number_format($transaction['kembalian'], 2, ',', '.') ?></span></p>
     </div>
 
     <div class="mb-4">
-      <h2 class="text-xl font-semibold">Daftar Barang</h2>
+      <h2 class="text-base font-semibold">Daftar Barang</h2>
       <ul class="list-disc list-inside">
         <?php
         $items = json_decode($transaction['items'], true);
